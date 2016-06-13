@@ -9,7 +9,17 @@ function Counter() {
 		].join(''),
 		controller: function ($scope) {
 			$scope.count = 0;
-		}
+		},
+		link: function (scope, elem, attr, ctrl) {
+			elem.on("click", function(){
+				scope.count ++;
+
+				scope.$apply();
+			});
+			scope.$on('$destroy', function (){
+				elem.off();
+			});
+		} 
 	}
 }
 
